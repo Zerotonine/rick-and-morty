@@ -5,6 +5,7 @@ import {getCharacterByID} from "../api/api"
 import {Center, Text, Box, Spacer, Icon} from "@chakra-ui/react"
 import React from "react"
 import {FaKiwiBird, FaOm} from "react-icons/fa"
+import Homelink from "../../components/Home"
 
 export default function Char({data}) {
     return (
@@ -26,6 +27,11 @@ export default function Char({data}) {
                         <Icon as={FaKiwiBird} mx="5px"/> Zuruck <Icon as={FaOm} mx="5px"/>
                     </Text>
                 </Link>
+            </Center>
+
+            <Spacer />
+            <Center>
+                <Homelink text="Hallo Welt" />
             </Center>
 
             <Spacer />
