@@ -1,16 +1,16 @@
 import Image from "next/image"
 import Head from "next/head"
 import Link from "next/link"
-import {getCharacterByID} from "../api/api"
+import {getCharacterByID, getCharacters} from "../api/api"
 import {Center, Text, Box, Spacer, Icon} from "@chakra-ui/react"
 import React from "react"
-import {FaKiwiBird, FaOm} from "react-icons/fa"
+import {GoHome} from "react-icons/go"
 
 export default function Char({data}) {
     return (
         <Box p="1rem" bg="gray.100" minH="100vh">
             <Head>
-                <title>SSR</title>
+                <title>SSG</title>
             </Head>
             <Center>
                 <Text as="h1" fontWeight="extrabold" fontSize={["2rem", "3rem", "4rem", "5rem"]}>
@@ -23,7 +23,7 @@ export default function Char({data}) {
             <Center>
                 <Link href="/">
                     <Text cursor="pointer" as="a" fontWeight="semibold" textDecoration="underline">
-                        <Icon as={FaKiwiBird} mx="5px"/> Zuruck <Icon as={FaOm} mx="5px"/>
+                        <Icon as={GoHome}/> Zuruck <Icon as={GoHome}/>
                     </Text>
                 </Link>
             </Center>
@@ -36,13 +36,31 @@ export default function Char({data}) {
     )
 }
 
-export async function getServerSideProps({params}) {
-    const data = await getCharacterByID(params.id);
+export async function getStaticPaths() {
+    const data = await getCharacters();
+    const paths = data.props.characters.map((char) => ({
+        params: {id: char.id},
+    }))
+
+    return {paths, fallback:false}
+}
+
+export async function getStaticProps({params}) {
+    const data = await getCharacterByID(params.id)
     return {
         props: {
-            data,
-        },
-    };
+            data
+        }
+    }
 }
+
+// export async function getServerSideProps({params}) {
+//     const data = await getCharacterByID(params.id);
+//     return {
+//         props: {
+//             data,
+//         },
+//     };
+// }
 
 
