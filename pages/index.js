@@ -48,8 +48,8 @@ export default function Home({data}) {
             >
               <Link href={staticPage ? `/static/${char.id}` : `/characters/${char.id}`}>
                 <a>
-                  {/* <Image src={char.image} alt={char.name} width="400px" height="400px"/> */}
-                  <img src={char.image} alt={char.name} width="400px" height="400px" />
+                  <Image src={char.image} alt={char.name} width="400px" height="400px"/>
+                  {/* <img src={char.image} alt={char.name} width="400px" height="400px" /> */}
                 </a>
               </Link>
             </WrapItem>
